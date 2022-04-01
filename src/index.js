@@ -15,3 +15,22 @@ const chance = new Chance();
 const departments = new Array(50).fill('').map(_=> chance.company());
 
 console.log(departments)
+
+// so we give ourselves a way to attch to thge html... later on this will pretty much be the only thing in 
+// the html  
+const departmentList = document.querySelector('#department-list')
+
+// so our famous map to generate the code 
+const render = ()=> {
+    const html = `
+        ${ departments.map( department => `
+        <li>${ department }</li>
+        `).join('') }
+        `;
+        // console.log(html);
+        // console.log(departmentList);
+        departmentList.innerHTML = html;
+}
+
+// here we call it 
+render();
