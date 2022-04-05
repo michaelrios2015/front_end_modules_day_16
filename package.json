@@ -13,13 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "casual": "^1.6.2",
     "chance": "^1.1.8",
-    "express": "^4.17.3",
-    "webpack": "^5.71.0",
-    "webpack-cli": "^4.9.2"
+    "express": "^4.17.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "chance": "^1.1.8",
+    "nodemon": "^2.0.15",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2"
   }
 }

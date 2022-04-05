@@ -1,14 +1,8 @@
 const express = require('express');
 const path = require('path');
-const Chance = require('chance');
-const casual = require('casual');
 
 const app = express();
 
-const chance = new Chance();
-
-console.log(casual.sentence);
-console.log(chance.string());
 
 
 
