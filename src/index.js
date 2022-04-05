@@ -1,56 +1,35 @@
-// i need to confiure my package json commands slightly differently 
+// and this is how we import the functions
+const { departments, classMap } = require('./data');
 
-// so here webpack is letting us bring this in just like we do on the backend (node)
-// but latter on we will bring it in slightly differently I have no idea why 
-const Chance = require('chance');
-
-
-const chance = new Chance();
-// so this was freaking out but apperntly a webpack configuration with node
-// fs: 'empty' will solve it 
-// import casual from 'casual';
-
-// so this is a pretty nifty way of creating an array of 50 black things and
-// then filling it with company names
-const departments = new Array(50).fill('').map(_=> chance.company());
-
+// so importing the render functiom
+const render = require('./render');
 
 // so we give ourselves a way to attch to thge html... later on this will pretty much be the only thing in 
 // the html  
 const departmentList = document.querySelector('#department-list')
 
-// so this is a reducer which I don't really understand as well as I should
-// it is iterating over deparments it is putting them in an object as the key field and making their value and empty array
-// I can see what it is doing and if I end up using javascipt a lot will need to learn it better 
-const classMap = departments.reduce((acc, department) => {
-    // that is an impresive bit of stringing together functions
-    acc[department] = new Array(chance.integer({min:1, max:3})).fill('-').map(_ => chance.word());
-    // if you don't return it, it wont work.. wonder if it is recursive... could be totally different
-    return acc;
-}, {})
-
 // console.log(departments)
 
-console.log(classMap)
+// console.log(classMap)
 
-// so our famous map to generate the code 
-const render = ()=> {
-    const html = `
-        ${ departments.map( department => `
-        <li>${ department }</li>
-        <ul>
-        ${ 
-            classMap[department].map ( fyou =>
-            `<li> ${ fyou } </li>`
-            )
-        }
-        </ul>
-        `).join('') }
-        `;
-        // console.log(html);
-        // console.log(departmentList);
-        departmentList.innerHTML = html;
-}
+// getting the hash number, multiply by one to make sure it's a number
+// ok so the const seemed to have stooped the curr from changinging
+let curr = window.location.hash.slice(1)*1;
+console.log(curr);
 
-// here we call it 
-render();
+
+// here we call it and now need to pass in the varibles (?? or just stuff it needs)
+// putting it in another function to dry things out
+const _render = ()=> {
+    render({departments, classMap, departmentList, curr});
+};
+
+_render();
+
+// so now it is listening for a hash change
+window.addEventListener('hashchange', ()=> {
+    // this had been a different current
+    curr = window.location.hash.slice(1)*1;
+    console.log(curr);
+    _render();
+});
